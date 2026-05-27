@@ -17,7 +17,7 @@ class EInfoRequest(RawResponseOptions):
 
 class ESearchRequest(HistoryContext, RawResponseOptions):
     db: str = Field(description="Entrez database name.")
-    term: str = Field(description="Entrez search term.")
+    term: str = Field(description="Entrez search term. To search by grant number, format like this: R01 AT009541[Grant Number]")
     retstart: int = Field(default=0, ge=0, description="Offset into the result set.")
     retmax: int = Field(default=20, ge=0, le=10000, description="Maximum number of IDs to return.")
     sort: str | None = Field(default=None, description="Optional sort order supported by the database.")
