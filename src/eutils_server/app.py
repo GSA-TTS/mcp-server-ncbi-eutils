@@ -10,12 +10,12 @@ mcp = FastMCP("eutils_mcp")
 register_routes(mcp)
 register_tools(mcp)
 
-app = mcp.http_app(stateless_http=True)
-
 if __name__ == "__main__":
-    port_env = os.environ.get("DATABRICKS_APP_PORT") or os.environ.get("PORT")
+    # When run directly, check for a platform port env var.
+    # If found, start an HTTP server (useful for Databricks local testing).
+    # Otherwise fall back to stdio for local MCP clients (Claude Desktop, etc.).
+    port_env = os.getenv("DATABRICKS_APP_PORT") or os.getenv("PORT")
     if port_env:
-        import uvicorn
-        uvicorn.run(app, host="0.0.0.0", port=int(port_env))
+        mcp.run(transport="http", host="0.0.0.0", port=int(port_env))
     else:
         mcp.run(transport="stdio")
