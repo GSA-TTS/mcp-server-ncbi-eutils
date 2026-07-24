@@ -1,5 +1,5 @@
 applications:
-  - name: nbci-eutils-mcp-server
+  - name: ncbi-eutils-mcp-server
     buildpacks:
         - python_buildpack
     command: PYTHONPATH=src python -m eutils_server.app
@@ -8,6 +8,6 @@ applications:
     env:
       PYTHONUNBUFFERED: 1
     routes:
-      - route: nbci-eutils-mcp-server.app.cloud.gov
+      - route: ncbi-eutils-mcp-server.app.cloud.gov
     disk_quota: 1G
     memory: 125M
