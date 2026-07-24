@@ -1,0 +1,13 @@
+applications:
+  - name: nbci-eutils-mcp-server
+    buildpacks:
+        - python_buildpack
+    command: PYTHONPATH=src python -m eutils_server.app
+    health-check-type: http
+    health-check-http-endpoint: /health
+    env:
+      PYTHONUNBUFFERED: 1
+    routes:
+      - route: nbci-eutils-mcp-server.app.cloud.gov
+    disk_quota: 1G
+    memory: 125M
